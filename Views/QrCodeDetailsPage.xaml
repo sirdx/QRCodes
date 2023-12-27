@@ -3,24 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
              xmlns:vm="clr-namespace:QRCodes.ViewModels"
-             x:Class="QRCodes.Views.CreatorPage"
-             x:DataType="vm:CreatorViewModel">
-    
+             x:Class="QRCodes.Views.QrCodeDetailsPage"
+             x:DataType="vm:QrCodeDetailsViewModel">
     <VerticalStackLayout>
-        <Label Text="Create a QR Code" 
-               HorizontalOptions="Center" />
-        <Editor Placeholder="Content"
-                Text="{Binding FormContent}"
-                HeightRequest="150" />
-        <Button Text="Submit"
-                Command="{Binding SubmitFormCommand}" />
+        <Label 
+            Text="{Binding QrCode.Content}"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
         <Label Text="Preview" />
         <zxing:BarcodeGeneratorView
             WidthRequest="100"
             HeightRequest="100"
             ForegroundColor="Black"
-            Value="{Binding FormContent}"
+            Value="{Binding QrCode.Content}"
             Format="QrCode"/>
     </VerticalStackLayout>
-    
 </ContentPage>

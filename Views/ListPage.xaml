@@ -3,20 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:mi="http://www.aathifmahir.com/dotnet/2022/maui/icons"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
              xmlns:m="clr-namespace:QRCodes.Models"
              xmlns:vm="clr-namespace:QRCodes.ViewModels"
              x:Class="QRCodes.Views.ListPage"
              x:DataType="vm:ListViewModel">
 
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <toolkit:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter" />
-        </ResourceDictionary>
-    </ContentPage.Resources>
-
     <Grid RowDefinitions="*">
         <CollectionView
-            ItemsSource="{Binding QrCodes}">
+            ItemsSource="{Binding QrCodes}"
+            SelectionMode="Single"
+            SelectedItem="{Binding SelectedQrCode}"
+            SelectionChangedCommand="{Binding ViewQrCodeCommand}">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical" />
             </CollectionView.ItemsLayout>
@@ -39,8 +37,18 @@
                 </ContentView>
             </CollectionView.EmptyView>
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="{m:QrCode}">
-                    
+                <DataTemplate x:DataType="m:QrCode">
+                    <Grid ColumnDefinitions="50,*">
+                        <zxing:BarcodeGeneratorView
+                            WidthRequest="50"
+                            HeightRequest="50"
+                            Margin="5"
+                            ForegroundColor="Black"
+                            Value="{Binding Content}"
+                            Format="QrCode"/>
+                        <Label Text="{Binding Content}"
+                               Grid.Column="1" />
+                    </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using QRCodes.Data;
 using QRCodes.ViewModels;
 using QRCodes.Views;
+using ZXing.Net.Maui.Controls;
 
 namespace QRCodes;
 
@@ -16,6 +17,7 @@ public static class MauiProgram
             .UseMauiApp<App>()
             .UseMauiCommunityToolkit()
             .UseFluentMauiIcons()
+            .UseBarcodeReader()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -32,6 +34,8 @@ public static class MauiProgram
         builder.Services.AddTransient<CreatorPage>();
         builder.Services.AddTransient<ListViewModel>();
         builder.Services.AddTransient<ListPage>();
+        builder.Services.AddTransient<QrCodeDetailsViewModel>();
+        builder.Services.AddTransient<QrCodeDetailsPage>();
 
         return builder.Build();
     }
