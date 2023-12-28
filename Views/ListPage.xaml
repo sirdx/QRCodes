@@ -9,8 +9,15 @@
              x:Class="QRCodes.Views.ListPage"
              x:DataType="vm:ListViewModel">
 
-    <Grid RowDefinitions="*">
+    <Grid RowDefinitions="Auto,*"
+          Padding="20,30,20,0">
+        <Label Text="QR Codes"
+               Margin="0,0,0,30"
+               FontSize="Title"
+               FontAttributes="Bold"
+               HorizontalOptions="Center" />
         <CollectionView
+            Grid.Row="1"
             ItemsSource="{Binding QrCodes}"
             SelectionMode="Single"
             SelectedItem="{Binding SelectedQrCode}"
@@ -46,8 +53,17 @@
                             ForegroundColor="Black"
                             Value="{Binding Content}"
                             Format="QrCode"/>
-                        <Label Text="{Binding Content}"
-                               Grid.Column="1" />
+                        <VerticalStackLayout
+                            Grid.Column="1"
+                            Margin="10,0,0,0"
+                            VerticalOptions="Center">
+                            <Label Text="{Binding Content}"
+                                   FontSize="Body"
+                                   MaxLines="1" />
+                            <Label Text="{Binding CreatedAt}"
+                                   FontSize="Caption"
+                                   TextColor="Gray" />
+                        </VerticalStackLayout>
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
