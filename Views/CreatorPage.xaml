@@ -54,5 +54,5 @@
                     Command="{Binding SaveToFileCommand}" />
         </Grid>
     </VerticalStackLayout>
-    
+
 </ContentPage>
